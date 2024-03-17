@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Ball object example</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <label for="speedInput">Velocidad de la moto:</label>
+    <input type="number" id="speedInput" name="speedInput" min="1" />
+    <button id="startButton">Iniciar simulación</button>
+    <canvas id="canvas" width="700" height="500"></canvas>
+    <label for="simulationTime">Tiempo de simulación (segundos):</label>
+    <input type="number" id="simulationTime" value="5" />
+    <label for="simulationDistance">Distancia de simulación (metros):</label>
+    <input type="number" id="simulationDistance" value="100" />
+    <script src="distanceDisplay.js"></script>
+    <script src="ruler.js"></script>
+    <script src="clock.js"></script>
+    <script src="imageMoto.js"></script>
+    <script src="animation.js"></script>
+  </body>
+</html>
