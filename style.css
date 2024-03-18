@@ -1,6 +1,29 @@
 body {
-  background-color: #666;
+  background-color: #f0f0f0; /* Un color de fondo más claro */
+  font-family: Arial, sans-serif; /* Una fuente más legible */
+  color: #333; /* Un color de texto más oscuro para un mejor contraste */
+  padding: 20px; /* Espacio alrededor del contenido para evitar que se pegue a los bordes de la ventana */
 }
+
 #canvas {
-  background-color: #fff;
+  border: 1px solid #ccc; /* Un borde alrededor del canvas para que sea más visible */
+  display: block; /* Evita que el canvas tenga un espacio extra en la parte inferior */
+  margin: 20px auto; /* Centra el canvas horizontalmente y añade espacio arriba y abajo */
+}
+
+input[type="number"],
+button {
+  padding: 5px; /* Espacio dentro de los inputs y botones para que sean más fáciles de usar */
+  margin: 5px 0; /* Espacio alrededor de los inputs y botones para evitar que se peguen entre sí */
+}
+
+button {
+  background-color: #007bff; /* Un color de fondo atractivo para el botón */
+  color: #fff; /* Un color de texto que contraste con el color de fondo del botón */
+  border: none; /* Elimina el borde predeterminado del botón */
+  cursor: pointer; /* Cambia el cursor a una mano cuando se pasa por encima del botón */
+}
+
+button:hover {
+  background-color: #0056b3; /* Oscurece el color de fondo del botón cuando se pasa por encima */
 }

@@ -1,4 +1,3 @@
-
 class DistanceDisplay {
   constructor(x, y) {
     this.x = x;
@@ -6,8 +5,8 @@ class DistanceDisplay {
     this.distance = 0;
   }
 
-  update(amount, pixelsPerMeter) {
-    this.distance += amount * pixelsPerMeter; // Convierte amount a píxeles antes de sumarlo a this.distance
+  update(amount) {
+    this.distance += amount; // Convierte amount a píxeles antes de sumarlo a this.distance
   }
   reset() {
     this.distance = 0;
@@ -21,7 +20,7 @@ class DistanceDisplay {
     context.font = "20px Arial";
 
     context.fillText(
-      "Distancia: " + distanceInMeters.toFixed(2) + " m",
+      "Distancia: " + distanceInMeters.toFixed(0) + " m",
       this.x,
       this.y
     );

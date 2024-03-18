@@ -12,7 +12,7 @@ class Clock {
     context.fillStyle = "black";
     context.font = "20px Arial";
     context.fillText(
-      "Tiempo de simulación: " + (this.elapsedTime / 1000).toFixed(2) + " s",
+      "Tiempo de simulación: " + (this.elapsedTime / 1000).toFixed(1) + " s",
       10,
       30
     );
