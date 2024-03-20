@@ -23,7 +23,7 @@ const initialMotoPositionY = 250;
 const fixedDeltaTime = 1 / 60; // Tiempo fijo entre cada actualización de estado en segundos
 
 let backgroundImage = new Image();
-backgroundImage.src = "background.jpg"; // Reemplaza esto con la ruta a tu imagen
+backgroundImage.src = "img/background.jpg"; // Reemplaza esto con la ruta a tu imagen
 
 // Asignación de eventos
 startButton.addEventListener("click", init);
@@ -52,8 +52,8 @@ window.onload = function () {
 // Función para cargar la imagen
 function loadImage() {
   backgroundImage = new Image();
-  backgroundImage.src = "background.jpg";
-  moto = new ImageMoto("moto.png", motoHeight, motoWidth);
+  backgroundImage.src = "img/background.jpg";
+  moto = new ImageMoto("img/moto.png", motoHeight, motoWidth);
   moto.x = initialMotoPositionX - moto.width;
   moto.y = initialMotoPositionY;
   moto.img.onload = function () {
