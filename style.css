@@ -1,29 +1,71 @@
 body {
-  background-color: #f0f0f0; /* Un color de fondo más claro */
-  font-family: Arial, sans-serif; /* Una fuente más legible */
-  color: #333; /* Un color de texto más oscuro para un mejor contraste */
-  padding: 20px; /* Espacio alrededor del contenido para evitar que se pegue a los bordes de la ventana */
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  color: #007bff;
+  text-align: center;
+  text-shadow: 2px 2px 4px #000000;
+}
+
+#controls,
+#params {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
 }
 
 #canvas {
-  border: 1px solid #ccc; /* Un borde alrededor del canvas para que sea más visible */
-  display: block; /* Evita que el canvas tenga un espacio extra en la parte inferior */
-  margin: 20px auto; /* Centra el canvas horizontalmente y añade espacio arriba y abajo */
+  display: block;
+  margin: 20px auto;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 input[type="number"],
 button {
-  padding: 5px; /* Espacio dentro de los inputs y botones para que sean más fáciles de usar */
-  margin: 5px 0; /* Espacio alrededor de los inputs y botones para evitar que se peguen entre sí */
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+input[type="number"] {
+  width: 100px;
 }
 
 button {
-  background-color: #007bff; /* Un color de fondo atractivo para el botón */
-  color: #fff; /* Un color de texto que contraste con el color de fondo del botón */
-  border: none; /* Elimina el borde predeterminado del botón */
-  cursor: pointer; /* Cambia el cursor a una mano cuando se pasa por encima del botón */
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 button:hover {
-  background-color: #0056b3; /* Oscurece el color de fondo del botón cuando se pasa por encima */
+  background-color: #0056b3;
+}
+p {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #333;
+}
+
+p > span {
+  background-color: #007bff;
+  color: white;
+  padding: 3px 5px;
+  border-radius: 3px;
 }

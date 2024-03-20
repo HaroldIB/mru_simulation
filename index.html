@@ -1,19 +1,42 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
   <head>
-    <meta charset="utf-8" />
-    <title>Ball object example</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Movimiento Rectilíneo Uniforme</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <label for="speedInput">Velocidad de la moto:</label>
-    <input type="number" id="speedInput" name="speedInput" min="1" />
-    <button id="startButton">Iniciar simulación</button>
-    <canvas id="canvas" width="1100" height="500"></canvas>
-    <label for="simulationTime">Tiempo de simulación (segundos):</label>
-    <input type="number" id="simulationTime" value="5" />
-    <label for="simulationDistance">Distancia de simulación (metros):</label>
-    <input type="number" id="simulationDistance" value="20" />
+    <h1>MOVIMIENTO RECTILÍNEO UNIFORME</h1>
+    <p>
+      En un paseo por el campo, ves a un motociclista surcando el camino con su
+      moto. La moto se desplaza suavemente con un movimiento constante y
+      uniforme. Esa moto tiene una velocidad aproximada de
+      <input
+        type="number"
+        id="speedInput"
+        name="speedInput"
+        min="1"
+        value="15"
+      />[m/s]. ¿Cuánto recorrerá en solo
+      <input type="number" id="simulationTime" value="5" /> segundos?
+    </p>
+
+    <div id="controls">
+      <!-- <label for="speedInput">Velocidad de la moto:</label> -->
+
+      <button id="startButton">Iniciar simulación</button>
+    </div>
+
+    <canvas id="canvas" width="700" height="500"></canvas>
+
+    <div id="params">
+      <!-- <label for="simulationTime">Tiempo de simulación (segundos):</label> -->
+
+      <label for="simulationDistance">Distancia de simulación (metros):</label>
+      <input type="number" id="simulationDistance" value="100" />
+    </div>
+
     <script src="distanceDisplay.js"></script>
     <script src="ruler.js"></script>
     <script src="clock.js"></script>

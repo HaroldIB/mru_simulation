@@ -7,7 +7,6 @@ const simulationTimeInput = document.getElementById("simulationTime");
 const simulationDistanceInput = document.getElementById("simulationDistance");
 
 // Declaración de variables
-let backgroundImage;
 let totalFrames; // Número total de cuadros que durará la simulación
 let frameCount = 0; // Contador de cuadros
 let moto;
@@ -23,10 +22,32 @@ const initialMotoPositionX = 50;
 const initialMotoPositionY = 250;
 const fixedDeltaTime = 1 / 60; // Tiempo fijo entre cada actualización de estado en segundos
 
+let backgroundImage = new Image();
+backgroundImage.src = "background.jpg"; // Reemplaza esto con la ruta a tu imagen
+
 // Asignación de eventos
 startButton.addEventListener("click", init);
 
-window.onload = loadImage;
+window.onload = function () {
+  loadImage();
+
+  // Dibujar el fondo
+  backgroundImage.onload = function () {
+    context.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
+
+    // Crear una instancia de Ruler
+    ruler = new Ruler(
+      Number(simulationDistanceInput.value),
+      10,
+      initialMotoPositionY + motoHeight,
+      initialMotoPositionX,
+      canvasWidthPixels
+    );
+
+    // Dibujar la regla
+    ruler.draw(context);
+  };
+};
 
 // Función para cargar la imagen
 function loadImage() {
