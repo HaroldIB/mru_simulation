@@ -25,10 +25,29 @@ const fixedDeltaTime = 1 / 60; // Tiempo fijo entre cada actualización de estad
 let backgroundImage = new Image();
 backgroundImage.src = "img/background.jpg"; // Reemplaza esto con la ruta a tu imagen
 
+// Ajusta el tamaño del canvas al tamaño de la ventana
+function resizeCanvas() {
+  const container = document.querySelector(".container");
+  canvas.width = container.clientWidth;
+  // canvas.width = window.innerWidth;
+  // canvas.height = window.innerHeight;
+}
+
 // Asignación de eventos
 startButton.addEventListener("click", init);
+// Llama a resizeCanvas y loadAndDrawImage cuando se redimensiona la ventana
+window.addEventListener("resize", function () {
+  resizeCanvas();
+  loadAndDrawImage();
+});
 
-window.onload = function () {
+// Llama a resizeCanvas al inicio para establecer el tamaño inicial del canvas
+resizeCanvas();
+// Llama a loadAndDrawImage cuando se carga la página
+window.onload = loadAndDrawImage;
+
+// Define la función que se ejecutará cuando se cargue la página y cuando se redimensione la ventana
+function loadAndDrawImage() {
   loadImage();
 
   // Dibujar el fondo
@@ -47,7 +66,7 @@ window.onload = function () {
     // Dibujar la regla
     ruler.draw(context);
   };
-};
+}
 
 // Función para cargar la imagen
 function loadImage() {
