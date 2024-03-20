@@ -7,36 +7,36 @@
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
-    <h1>MOVIMIENTO RECTILÍNEO UNIFORME</h1>
-    <p>
-      En un paseo por el campo, ves a un motociclista surcando el camino con su
-      moto. La moto se desplaza suavemente con un movimiento constante y
-      uniforme. Esa moto tiene una velocidad aproximada de
-      <input
-        type="number"
-        id="speedInput"
-        name="speedInput"
-        min="1"
-        value="15"
-      />[m/s]. ¿Cuánto recorrerá en solo
-      <input type="number" id="simulationTime" value="5" /> segundos?
-    </p>
-
-    <div id="controls">
-      <!-- <label for="speedInput">Velocidad de la moto:</label> -->
-
-      <button id="startButton">Iniciar simulación</button>
+    <div class="container">
+      <h1>MOVIMIENTO RECTILÍNEO UNIFORME</h1>
+      <div class="content">
+        <p>
+          En un paseo por el campo, ves a un motociclista surcando el camino con
+          su moto. La moto se desplaza suavemente con un movimiento constante y
+          uniforme. Esa moto tiene una velocidad aproximada de
+          <input
+            type="number"
+            id="speedInput"
+            name="speedInput"
+            min="1"
+            value="15"
+          />[m/s]. ¿Cuánto recorrerá en solo
+          <input type="number" id="simulationTime" value="5" /> segundos?
+        </p>
+        <div class="controls">
+          <!-- <label for="speedInput">Velocidad de la moto:</label> -->
+          <button id="startButton">Iniciar simulación</button>
+        </div>
+      </div>
+      <canvas id="canvas" width="700" height="500"></canvas>
+      <div class="params">
+        <!-- <label for="simulationTime">Tiempo de simulación (segundos):</label> -->
+        <label for="simulationDistance"
+          >Distancia de simulación (metros):</label
+        >
+        <input type="number" id="simulationDistance" value="100" />
+      </div>
     </div>
-
-    <canvas id="canvas" width="700" height="500"></canvas>
-
-    <div id="params">
-      <!-- <label for="simulationTime">Tiempo de simulación (segundos):</label> -->
-
-      <label for="simulationDistance">Distancia de simulación (metros):</label>
-      <input type="number" id="simulationDistance" value="100" />
-    </div>
-
     <script src="js/distanceDisplay.js"></script>
     <script src="js/ruler.js"></script>
     <script src="js/clock.js"></script>

@@ -1,71 +1,71 @@
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f0f0f0;
-  margin: 0;
-  padding: 0;
-}
-
+/* Estilos para el contenedor principal */
 .container {
   max-width: 800px;
-  margin: 20px auto;
+  margin: 0 auto;
   padding: 20px;
-  border: 2px solid #ccc;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-h1 {
-  color: #007bff;
-  text-align: center;
-  text-shadow: 2px 2px 4px #000000;
-}
-
-#controls,
-#params {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-}
-
-#canvas {
-  display: block;
-  margin: 20px auto;
-  border: 2px solid #ccc;
+  background-color: #f4f4f4;
+  border: 1px solid #ddd;
   border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-input[type="number"],
+/* Estilos para el encabezado */
+h1 {
+  text-align: center;
+  color: #333;
+}
+
+/* Estilos para el contenido */
+.content {
+  margin-bottom: 20px;
+}
+
+/* Estilos para el párrafo */
+p {
+  font-size: 18px;
+}
+
+/* Estilos para los controles */
+.controls {
+  margin-top: 10px;
+  text-align: center;
+}
+
+/* Estilos para el botón */
 button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
   border: none;
   border-radius: 5px;
-  padding: 10px;
-}
-
-input[type="number"] {
-  width: 100px;
-}
-
-button {
-  background-color: #007bff;
-  color: white;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s;
 }
 
 button:hover {
   background-color: #0056b3;
 }
-p {
-  font-size: 18px;
-  line-height: 1.6;
-  color: #333;
+
+/* Estilos para la entrada de texto */
+input[type="number"] {
+  padding: 5px;
+  width: 80px;
 }
 
-p > span {
-  background-color: #007bff;
-  color: white;
-  padding: 3px 5px;
-  border-radius: 3px;
+/* Estilos para la etiqueta */
+label {
+  font-weight: bold;
+}
+
+/* Estilos para el canvas */
+#canvas {
+  display: block;
+  margin: 0 auto;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Estilos para los parámetros */
+.params {
+  text-align: center;
+  margin-top: 20px;
 }
