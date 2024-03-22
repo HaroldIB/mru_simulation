@@ -10,6 +10,12 @@
     <div class="container">
       <h1>MOVIMIENTO RECTILÍNEO UNIFORME</h1>
       <div class="content">
+        <div id="modal" class="modal">
+          <div class="modal-content">
+            <p id="modalText"></p>
+            <button id="modalButton">Confirmar</button>
+          </div>
+        </div>
         <p>
           En un paseo por el campo, ves a un motociclista surcando el camino con
           su moto. La moto se desplaza suavemente con un movimiento constante y
@@ -19,7 +25,7 @@
             id="speedInput"
             name="speedInput"
             min="1"
-            value="15"
+            value="80"
           />[m/s]. ¿Cuánto recorrerá en solo
           <input type="number" id="simulationTime" value="5" /> segundos?
         </p>
@@ -42,10 +48,11 @@
           id="simulationDistance"
           min="500"
           max="6325"
-          value="500"
+          value="1000"
           oninput="updateValue(this.value)"
         />
-        <span id="distanceValue">500</span>
+        <span id="distanceValue">1000</span>
+        <!-- Cambia este valor a 1000 -->
 
         <script>
           function updateValue(value) {

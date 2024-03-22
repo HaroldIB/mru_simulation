@@ -112,3 +112,27 @@ input[type="range"]::-moz-range-thumb {
   background: #007bff; /* Establece el color de fondo del pulgar */
   cursor: pointer; /* Cambia el cursor a un puntero cuando se pasa por encima del pulgar */
 }
+
+.modal {
+  display: none; /* La ventana modal está oculta por defecto */
+  position: fixed; /* La ventana modal se posiciona en relación con la ventana del navegador */
+  z-index: 1; /* La ventana modal se sitúa por encima de todo lo demás */
+  left: 0;
+  top: 0;
+  width: 100%; /* La ventana modal ocupa todo el ancho de la pantalla */
+  height: 100%; /* La ventana modal ocupa todo el alto de la pantalla */
+  overflow: auto; /* Habilita el scroll si es necesario */
+  background-color: rgba(0,0,0,0.4); /* Color de fondo con opacidad */
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% desde la parte superior y centrado */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Podrías cambiar esto a un valor fijo si prefieres */
+}
+
+#modalButton {
+  /* Puedes agregar estilos para el botón aquí */
+}

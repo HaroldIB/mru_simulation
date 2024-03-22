@@ -13,10 +13,11 @@ class Clock {
   }
 
   draw(context) {
-    context.fillStyle = "black";
-    context.font = "20px Arial";
+    context.fillStyle = "red"; // Cambia esto al color que prefieras para el texto del Tiempo de Simulación
+    context.font = "24px Arial"; // Cambia esto al tamaño y tipo de letra que prefieras
+
     context.fillText(
-      "Tiempo de simulación: " + (this.elapsedTime / 1000).toFixed(1) + " s",
+      "Tiempo: " + (this.elapsedTime / 1000).toFixed(1) + " s",
       10,
       30
     );

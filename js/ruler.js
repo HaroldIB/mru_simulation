@@ -1,7 +1,7 @@
 class Ruler {
   constructor(distance, height, startY, offsetX, totalWidth) {
     this.distance = distance; // Cambia 'distance' a 'this.distance'
-    this.marks = 12;
+    this.marks = 10;
     this.height = height;
     this.startY = startY;
     this.offsetX = offsetX;
@@ -10,8 +10,8 @@ class Ruler {
   }
 
   draw(context) {
-    context.fillStyle = "black";
-    context.font = "10px Arial";
+    context.fillStyle = "blue"; // Cambia esto al color que prefieras para las marcas de la regla
+    context.font = "12px Arial"; // Cambia esto al tamaño y tipo de letra que prefieras
 
     context.fillRect(this.offsetX, this.startY, this.totalWidth, 1);
 

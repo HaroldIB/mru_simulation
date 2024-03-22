@@ -6,7 +6,10 @@ const speedInput = document.getElementById("speedInput");
 const simulationTimeInput = document.getElementById("simulationTime");
 const simulationDistanceInput = document.getElementById("simulationDistance");
 const endButton = document.getElementById("endButton");
-
+// Cuando el usuario hace clic en el botón de confirmar, cierra la ventana modal
+document.getElementById("modalButton").onclick = function () {
+  document.getElementById("modal").style.display = "none";
+};
 // Declaración de variables
 let totalFrames; // Número total de cuadros que durará la simulación
 let frameCount = 0; // Contador de cuadros
@@ -18,8 +21,9 @@ let background;
 let animationId;
 let canvasWidthPixels = canvas.width - 100;
 let pixelsPerMeter; // Mueve la declaración de pixelsPerMeter aquí
-const motoHeight = 40;
-const motoWidth = 40;
+let simulationDistance;
+let motoHeight = 40;
+let motoWidth = 40;
 const initialMotoPositionX = 50;
 const initialMotoPositionY = 200;
 const fixedDeltaTime = 1 / 60; // Tiempo fijo entre cada actualización de estado en segundos
@@ -38,8 +42,10 @@ window.onload = loadAndDrawImage;
 function loadAndDrawImage() {
   loadImage();
   background.image.onload = function () {
-    const simulationDistance = Number(simulationDistanceInput.value);
+    simulationDistance = Number(simulationDistanceInput.value);
     background.draw(simulationDistance);
+    // motoHeight = -0.006 * simulationDistance + 43;
+    motoWidth = -0.0034 * simulationDistance + 41.72;
 
     ruler = new Ruler(
       Number(simulationDistanceInput.value),
@@ -56,7 +62,10 @@ function loadAndDrawImage() {
 function loadImage() {
   background.image = new Image();
   background.image.src = "img/background.jpg";
-  moto = new ImageMoto("img/moto.png", motoHeight, motoWidth);
+  simulationDistance = Number(simulationDistanceInput.value);
+  // motoHeight = -0.006 * simulationDistance + 43;
+  motoWidth = -0.0034 * simulationDistance + 41.72;
+  moto = new ImageMoto("img/moto.png", motoWidth, motoHeight);
   moto.x = initialMotoPositionX - moto.width;
   moto.y = initialMotoPositionY;
   moto.img.onload = function () {
@@ -103,12 +112,26 @@ function init() {
   // Deshabilita el botón de inicio y la barra de Distancia de Simulación
   startButton.disabled = true;
   simulationDistanceInput.disabled = true;
+  // Deshabilita el botón de inicio, la barra de Distancia de Simulación y las entradas de texto
+  startButton.disabled = true;
+  simulationDistanceInput.disabled = true;
+  speedInput.disabled = true;
+  simulationTimeInput.disabled = true;
 }
 
 // Función para terminar la simulación
 function endSimulation() {
   // Cancela la animación
   cancelAnimationFrame(animationId);
+  // Muestra un mensaje emergente con la distancia alcanzada por el motociclista
+  const modal = document.getElementById("modal");
+  const modalText = document.getElementById("modalText");
+  const distanceInMeters = distanceDisplay.distance / pixelsPerMeter;
+  modalText.textContent =
+    "La distancia alcanzada por el motociclista es: " +
+    distanceInMeters.toFixed(0) +
+    " m";
+  modal.style.display = "block";
 
   // Restablece el estado de la simulación
   moto.x = initialMotoPositionX;
@@ -127,6 +150,11 @@ function endSimulation() {
   // Habilita el botón de inicio y la barra de Distancia de Simulación
   startButton.disabled = false;
   simulationDistanceInput.disabled = false;
+  // Habilita el botón de inicio, la barra de Distancia de Simulación y las entradas de texto
+  startButton.disabled = false;
+  simulationDistanceInput.disabled = false;
+  speedInput.disabled = false;
+  simulationTimeInput.disabled = false;
 }
 
 // Función para el bucle de animación
@@ -150,8 +178,24 @@ function animFrame() {
   if (frameCount < totalFrames) {
     animationId = requestAnimationFrame(animFrame, canvas);
   } else {
+    // Muestra un mensaje emergente con la distancia alcanzada por el motociclista
+    const modal = document.getElementById("modal");
+    const modalText = document.getElementById("modalText");
+    const distanceInMeters = distanceDisplay.distance / pixelsPerMeter;
+    modalText.textContent =
+      "La distancia alcanzada por el motociclista es: " +
+      distanceInMeters.toFixed(0) +
+      " m";
+    modal.style.display = "block";
+
     // La simulación ha terminado
     startButton.disabled = false;
+    simulationDistanceInput.disabled = false;
+    // Habilita el botón de inicio, la barra de Distancia de Simulación y las entradas de texto
+    startButton.disabled = false;
+    simulationDistanceInput.disabled = false;
+    speedInput.disabled = false;
+    simulationTimeInput.disabled = false;
   }
 }
 
