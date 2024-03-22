@@ -5,6 +5,7 @@ const startButton = document.getElementById("startButton");
 const speedInput = document.getElementById("speedInput");
 const simulationTimeInput = document.getElementById("simulationTime");
 const simulationDistanceInput = document.getElementById("simulationDistance");
+const endButton = document.getElementById("endButton");
 
 // Declaración de variables
 let totalFrames; // Número total de cuadros que durará la simulación
@@ -23,26 +24,12 @@ const initialMotoPositionY = 250;
 const fixedDeltaTime = 1 / 60; // Tiempo fijo entre cada actualización de estado en segundos
 
 let backgroundImage = new Image();
-backgroundImage.src = "img/background.jpg"; // Reemplaza esto con la ruta a tu imagen
-
-// Ajusta el tamaño del canvas al tamaño de la ventana
-function resizeCanvas() {
-  const container = document.querySelector(".container");
-  canvas.width = container.clientWidth;
-  // canvas.width = window.innerWidth;
-  // canvas.height = window.innerHeight;
-}
+backgroundImage.src = "img/background.jpg"; // Ruta de la imagen de fondo
 
 // Asignación de eventos
 startButton.addEventListener("click", init);
-// Llama a resizeCanvas y loadAndDrawImage cuando se redimensiona la ventana
-window.addEventListener("resize", function () {
-  resizeCanvas();
-  loadAndDrawImage();
-});
+endButton.addEventListener("click", endSimulation);
 
-// Llama a resizeCanvas al inicio para establecer el tamaño inicial del canvas
-resizeCanvas();
 // Llama a loadAndDrawImage cuando se carga la página
 window.onload = loadAndDrawImage;
 
@@ -113,6 +100,30 @@ function init() {
   distanceDisplay.draw(context);
 
   animFrame();
+
+  // Deshabilita el botón de inicio
+  startButton.disabled = true;
+}
+
+// Función para terminar la simulación
+function endSimulation() {
+  // Cancela la animación
+  cancelAnimationFrame(animationId);
+
+  // Restablece el estado de la simulación
+  moto.x = initialMotoPositionX;
+  moto.y = initialMotoPositionY;
+  frameCount = 0;
+
+  // Habilita el botón de inicio
+  startButton.disabled = false;
+
+  // Restablece los valores de Tiempo de Simulación y Distancia
+  clock.reset();
+  distanceDisplay.reset();
+
+  // Redibuja la escena
+  loadAndDrawImage();
 }
 
 // Función para el bucle de animación
@@ -130,9 +141,13 @@ function animFrame() {
   distanceDisplay.draw(context); // Dibuja la distancia después del bucle while
 
   frameCount++; // Incrementa el contador de cuadros
+
   // Solicita el siguiente cuadro de animación solo si no se han mostrado 180 cuadros
   if (frameCount < totalFrames) {
     animationId = requestAnimationFrame(animFrame, canvas);
+  } else {
+    // La simulación ha terminado
+    startButton.disabled = false;
   }
 }
 
