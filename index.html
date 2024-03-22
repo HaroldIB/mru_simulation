@@ -25,19 +25,37 @@
         </p>
         <div class="controls">
           <!-- <label for="speedInput">Velocidad de la moto:</label> -->
-          <button id="startButton">Iniciar simulación</button>
-          <button id="endButton">Terminar simulación</button>
+          <button id="startButton" class="startButton">
+            Iniciar simulación
+          </button>
+          <button id="endButton" class="endButton">Terminar simulación</button>
         </div>
       </div>
-      <canvas id="canvas" width="700" height="500"></canvas>
+      <canvas id="canvas" width="700" height="300"></canvas>
       <div class="params">
         <!-- <label for="simulationTime">Tiempo de simulación (segundos):</label> -->
         <label for="simulationDistance"
           >Distancia de simulación (metros):</label
         >
-        <input type="number" id="simulationDistance" value="100" />
+        <input
+          type="range"
+          id="simulationDistance"
+          min="500"
+          max="6325"
+          value="500"
+          oninput="updateValue(this.value)"
+        />
+        <span id="distanceValue">500</span>
+
+        <script>
+          function updateValue(value) {
+            document.getElementById("distanceValue").textContent = value;
+          }
+        </script>
       </div>
     </div>
+
+    <script src="js/background.js"></script>
     <script src="js/distanceDisplay.js"></script>
     <script src="js/ruler.js"></script>
     <script src="js/clock.js"></script>

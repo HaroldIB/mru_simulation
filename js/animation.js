@@ -14,21 +14,22 @@ let moto;
 let clock;
 let distanceDisplay;
 let ruler;
+let background;
 let animationId;
 let canvasWidthPixels = canvas.width - 100;
 let pixelsPerMeter; // Mueve la declaración de pixelsPerMeter aquí
 const motoHeight = 40;
 const motoWidth = 40;
 const initialMotoPositionX = 50;
-const initialMotoPositionY = 250;
+const initialMotoPositionY = 200;
 const fixedDeltaTime = 1 / 60; // Tiempo fijo entre cada actualización de estado en segundos
 
-let backgroundImage = new Image();
-backgroundImage.src = "img/background.jpg"; // Ruta de la imagen de fondo
+background = new Background("img/background.jpg", canvas, context);
 
 // Asignación de eventos
 startButton.addEventListener("click", init);
 endButton.addEventListener("click", endSimulation);
+simulationDistanceInput.addEventListener("input", loadAndDrawImage);
 
 // Llama a loadAndDrawImage cuando se carga la página
 window.onload = loadAndDrawImage;
@@ -36,12 +37,10 @@ window.onload = loadAndDrawImage;
 // Define la función que se ejecutará cuando se cargue la página y cuando se redimensione la ventana
 function loadAndDrawImage() {
   loadImage();
+  background.image.onload = function () {
+    const simulationDistance = Number(simulationDistanceInput.value);
+    background.draw(simulationDistance);
 
-  // Dibujar el fondo
-  backgroundImage.onload = function () {
-    context.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
-
-    // Crear una instancia de Ruler
     ruler = new Ruler(
       Number(simulationDistanceInput.value),
       10,
@@ -49,16 +48,14 @@ function loadAndDrawImage() {
       initialMotoPositionX,
       canvasWidthPixels
     );
-
-    // Dibujar la regla
     ruler.draw(context);
   };
 }
 
 // Función para cargar la imagen
 function loadImage() {
-  backgroundImage = new Image();
-  backgroundImage.src = "img/background.jpg";
+  background.image = new Image();
+  background.image.src = "img/background.jpg";
   moto = new ImageMoto("img/moto.png", motoHeight, motoWidth);
   moto.x = initialMotoPositionX - moto.width;
   moto.y = initialMotoPositionY;
@@ -103,6 +100,9 @@ function init() {
 
   // Deshabilita el botón de inicio
   startButton.disabled = true;
+  // Deshabilita el botón de inicio y la barra de Distancia de Simulación
+  startButton.disabled = true;
+  simulationDistanceInput.disabled = true;
 }
 
 // Función para terminar la simulación
@@ -124,12 +124,16 @@ function endSimulation() {
 
   // Redibuja la escena
   loadAndDrawImage();
+  // Habilita el botón de inicio y la barra de Distancia de Simulación
+  startButton.disabled = false;
+  simulationDistanceInput.disabled = false;
 }
 
 // Función para el bucle de animación
 function animFrame() {
   context.clearRect(0, 0, canvas.width, canvas.height);
-  context.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
+  const simulationDistance = Number(simulationDistanceInput.value);
+  background.draw(simulationDistance);
 
   ruler.draw(context);
   clock.update();

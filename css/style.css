@@ -44,6 +44,21 @@ button {
 button:hover {
   background-color: #0056b3;
 }
+/* Estilos para el botón de Iniciar Simulación */
+button.startButton {
+  background-color: #007bff;
+}
+
+/* Estilos para el botón de Terminar Simulación */
+button.endButton {
+  background-color: #dc3545;
+}
+
+/* Estilos para el botón de Iniciar Simulación cuando está deshabilitado */
+button.startButton:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
 
 /* Estilos para la entrada de texto */
 input[type="number"] {
@@ -68,4 +83,32 @@ label {
 .params {
   text-align: center;
   margin-top: 20px;
+}
+
+/* Estilos para la barra deslizante de la Distancia de simulación */
+input[type="range"] {
+  width: 100%; /* Asegúrate de que la barra deslizante ocupe todo el ancho disponible */
+  height: 25px; /* Establece la altura de la barra deslizante */
+  background: #ddd; /* Establece el color de fondo de la barra deslizante */
+  outline: none; /* Elimina el contorno que aparece al hacer clic en la barra deslizante */
+  opacity: 0.7; /* Establece la opacidad de la barra deslizante */
+  -webkit-transition: 0.2s; /* Añade una transición para suavizar el cambio de valor */
+  transition: opacity 0.2s;
+}
+
+/* Estilos para el pulgar de la barra deslizante */
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Elimina el estilo por defecto del pulgar */
+  appearance: none;
+  width: 25px; /* Establece el ancho del pulgar */
+  height: 25px; /* Establece la altura del pulgar */
+  background: #007bff; /* Establece el color de fondo del pulgar */
+  cursor: pointer; /* Cambia el cursor a un puntero cuando se pasa por encima del pulgar */
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 25px; /* Establece el ancho del pulgar */
+  height: 25px; /* Establece la altura del pulgar */
+  background: #007bff; /* Establece el color de fondo del pulgar */
+  cursor: pointer; /* Cambia el cursor a un puntero cuando se pasa por encima del pulgar */
 }
