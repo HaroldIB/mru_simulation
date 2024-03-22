@@ -1,3 +1,5 @@
+const graphCanvas = document.getElementById("graphCanvas");
+const graphContext = graphCanvas.getContext("2d");
 // Obtener elementos del DOM una sola vez
 const canvas = document.getElementById("canvas");
 const context = canvas.getContext("2d");
@@ -24,6 +26,7 @@ let pixelsPerMeter; // Mueve la declaración de pixelsPerMeter aquí
 let simulationDistance;
 let motoHeight = 40;
 let motoWidth = 40;
+let graph;
 const initialMotoPositionX = 50;
 const initialMotoPositionY = 200;
 const fixedDeltaTime = 1 / 60; // Tiempo fijo entre cada actualización de estado en segundos
@@ -81,6 +84,10 @@ function init() {
     cancelAnimationFrame(animationId);
   }
 
+  const maxTime = Number(simulationTimeInput.value);
+  const maxDistance = Number(simulationDistanceInput.value);
+  graph = new Graph(graphCanvas, graphContext, maxTime, maxDistance);
+
   // Calcula pixelsPerMeter en función de la distancia de simulación
   const simulationDistance = Number(simulationDistanceInput.value);
   pixelsPerMeter = canvasWidthPixels / simulationDistance;
@@ -118,20 +125,12 @@ function init() {
   speedInput.disabled = true;
   simulationTimeInput.disabled = true;
 }
+startButton.addEventListener("click", init);
 
 // Función para terminar la simulación
 function endSimulation() {
   // Cancela la animación
   cancelAnimationFrame(animationId);
-  // Muestra un mensaje emergente con la distancia alcanzada por el motociclista
-  const modal = document.getElementById("modal");
-  const modalText = document.getElementById("modalText");
-  const distanceInMeters = distanceDisplay.distance / pixelsPerMeter;
-  modalText.textContent =
-    "La distancia alcanzada por el motociclista es: " +
-    distanceInMeters.toFixed(0) +
-    " m";
-  modal.style.display = "block";
 
   // Restablece el estado de la simulación
   moto.x = initialMotoPositionX;
@@ -166,6 +165,10 @@ function animFrame() {
   ruler.draw(context);
   clock.update();
   clock.draw(context);
+
+  const time = frameCount / 60;
+  graph.addPoint(time, distanceDisplay.distance / pixelsPerMeter);
+  graph.draw();
 
   const distance = onEachStep(fixedDeltaTime); // Guarda la distancia que devuelve onEachStep
 
