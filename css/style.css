@@ -155,7 +155,7 @@ label {
   justify-content: center; /* Esto centrará verticalmente los elementos dentro de .simulation-container */
 }
 /* Estilos para tabletas y celular horizontal */
-@media (min-width: 768px) {
+@media (min-width: 700px) {
   .graph-container {
     display: flex;
     flex-direction: row;
