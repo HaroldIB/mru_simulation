@@ -21,22 +21,22 @@ h1 {
 
 /* Estilos para el párrafo */
 p {
-  font-size: 18px;
+  font-size: 1rem;
 }
 
 /* Estilos para los controles */
 .controls {
-  margin-top: 10px;
+  margin-top: 1rem;
   text-align: center;
 }
 
 /* Estilos para el botón */
 button {
-  padding: 10px 20px;
+  padding: 0.5rem 1rem;
   background-color: #007bff;
   color: #fff;
   border: none;
-  border-radius: 5px;
+  border-radius: 0.25rem;
   cursor: pointer;
   transition: background-color 0.3s;
 }
@@ -44,6 +44,7 @@ button {
 button:hover {
   background-color: #0056b3;
 }
+
 /* Estilos para el botón de Iniciar Simulación */
 button.startButton {
   background-color: #007bff;
@@ -62,7 +63,7 @@ button.startButton:disabled {
 
 /* Estilos para la entrada de texto */
 input[type="number"] {
-  padding: 5px;
+  padding: 0.25rem;
   width: 80px;
 }
 
@@ -74,65 +75,33 @@ label {
 /* Estilos para el canvas */
 #canvas {
   display: block;
+  width: 100%;
+  height: auto;
   margin: 0 auto;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 0.25rem;
 }
 
 /* Estilos para los parámetros */
 .params {
   text-align: center;
-  margin-top: 20px;
 }
 
-/* Estilos para la barra deslizante de la Distancia de simulación */
-input[type="range"] {
-  width: 100%; /* Asegúrate de que la barra deslizante ocupe todo el ancho disponible */
-  height: 25px; /* Establece la altura de la barra deslizante */
-  background: #ddd; /* Establece el color de fondo de la barra deslizante */
-  outline: none; /* Elimina el contorno que aparece al hacer clic en la barra deslizante */
-  opacity: 0.7; /* Establece la opacidad de la barra deslizante */
-  -webkit-transition: 0.2s; /* Añade una transición para suavizar el cambio de valor */
-  transition: opacity 0.2s;
-}
-
-/* Estilos para el pulgar de la barra deslizante */
-input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none; /* Elimina el estilo por defecto del pulgar */
-  appearance: none;
-  width: 25px; /* Establece el ancho del pulgar */
-  height: 25px; /* Establece la altura del pulgar */
-  background: #007bff; /* Establece el color de fondo del pulgar */
-  cursor: pointer; /* Cambia el cursor a un puntero cuando se pasa por encima del pulgar */
-}
-
-input[type="range"]::-moz-range-thumb {
-  width: 25px; /* Establece el ancho del pulgar */
-  height: 25px; /* Establece la altura del pulgar */
-  background: #007bff; /* Establece el color de fondo del pulgar */
-  cursor: pointer; /* Cambia el cursor a un puntero cuando se pasa por encima del pulgar */
-}
-
-.modal {
-  display: none; /* La ventana modal está oculta por defecto */
-  position: fixed; /* La ventana modal se posiciona en relación con la ventana del navegador */
-  z-index: 1; /* La ventana modal se sitúa por encima de todo lo demás */
+#modal {
+  position: fixed;
+  z-index: 1;
   left: 0;
   top: 0;
-  width: 100%; /* La ventana modal ocupa todo el ancho de la pantalla */
-  height: 100%; /* La ventana modal ocupa todo el alto de la pantalla */
-  overflow: auto; /* Habilita el scroll si es necesario */
-  background-color: rgba(0,0,0,0.4); /* Color de fondo con opacidad */
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 .modal-content {
   background-color: #fefefe;
-  margin: 15% auto; /* 15% desde la parte superior y centrado */
+  margin: 15% auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 80%; /* Podrías cambiar esto a un valor fijo si prefieres */
-}
-
-#modalButton {
-  /* Puedes agregar estilos para el botón aquí */
+  width: 80%;
 }
