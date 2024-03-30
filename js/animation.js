@@ -1,3 +1,6 @@
+const velocityGraphCanvas = document.getElementById("velocityGraphCanvas");
+const velocityGraphContext = velocityGraphCanvas.getContext("2d");
+
 const graphCanvas = document.getElementById("graphCanvas");
 const graphContext = graphCanvas.getContext("2d");
 // Obtener elementos del DOM una sola vez
@@ -10,7 +13,7 @@ const simulationDistanceInput = document.getElementById("simulationDistance");
 const endButton = document.getElementById("endButton");
 // Cuando el usuario hace clic en el botón de confirmar, cierra la ventana modal
 document.getElementById("modalButton").onclick = function () {
-  document.getElementById("modal").style.display = "none";
+  document.getElementById("modal").style.visibility = "hidden"; // Cambia esto
 };
 // Declaración de variables
 let totalFrames; // Número total de cuadros que durará la simulación
@@ -27,6 +30,7 @@ let simulationDistance;
 let motoHeight = 40;
 let motoWidth = 40;
 let graph;
+let velocityGraph;
 const initialMotoPositionX = 50;
 const initialMotoPositionY = 200;
 const fixedDeltaTime = 1 / 60; // Tiempo fijo entre cada actualización de estado en segundos
@@ -58,6 +62,20 @@ function loadAndDrawImage() {
       canvasWidthPixels
     );
     ruler.draw(context);
+
+    // Agrega estas líneas para dibujar la gráfica inicial
+    const maxTime = Number(simulationTimeInput.value);
+    const maxDistance = Number(simulationDistanceInput.value);
+    const maxSpeed = Number(speedInput.value) * 2;
+    graph = new Graph(graphCanvas, graphContext, maxTime, maxDistance);
+    graph.draw();
+    velocityGraph = new Graph(
+      velocityGraphCanvas,
+      velocityGraphContext,
+      maxTime,
+      maxSpeed
+    );
+    velocityGraph.draw();
   };
 }
 
@@ -170,6 +188,10 @@ function animFrame() {
   graph.addPoint(time, distanceDisplay.distance / pixelsPerMeter);
   graph.draw();
 
+  const speed = moto.vx / pixelsPerMeter;
+  velocityGraph.addPoint(time, speed);
+  velocityGraph.draw();
+
   const distance = onEachStep(fixedDeltaTime); // Guarda la distancia que devuelve onEachStep
 
   distanceDisplay.update(distance, pixelsPerMeter); // Pasa pixelsPerMeter como un argumento
@@ -189,7 +211,7 @@ function animFrame() {
       "La distancia alcanzada por el motociclista es: " +
       distanceInMeters.toFixed(0) +
       " m";
-    modal.style.display = "block";
+    modal.style.visibility = "visible"; /* Cambia esto */
 
     // La simulación ha terminado
     startButton.disabled = false;

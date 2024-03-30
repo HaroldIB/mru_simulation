@@ -41,30 +41,43 @@
           <button id="endButton" class="endButton">Terminar simulación</button>
         </div>
       </div>
-      <canvas id="canvas" width="700" height="300"></canvas>
-      <div class="params">
-        <!-- <label for="simulationTime">Tiempo de simulación (segundos):</label> -->
-        <label for="simulationDistance"
-          >Distancia de simulación (metros):</label
-        >
-        <input
-          type="range"
-          id="simulationDistance"
-          min="500"
-          max="6325"
-          value="1000"
-          oninput="updateValue(this.value)"
-        />
-        <span id="distanceValue">1000</span>
-        <!-- Cambia este valor a 1000 -->
+      <div class="main-container">
+        <div class="simulation-container">
+          <canvas id="canvas" width="700" height="300"></canvas>
+          <div class="params">
+            <!-- <label for="simulationTime">Tiempo de simulación (segundos):</label> -->
+            <label for="simulationDistance"
+              >Distancia de simulación (metros):</label
+            >
+            <input
+              type="range"
+              id="simulationDistance"
+              min="500"
+              max="6325"
+              value="1000"
+              oninput="updateValue(this.value)"
+            />
+            <span id="distanceValue">1000</span>
+            <!-- Cambia este valor a 1000 -->
 
-        <script>
-          function updateValue(value) {
-            document.getElementById("distanceValue").textContent = value;
-          }
-        </script>
+            <script>
+              function updateValue(value) {
+                document.getElementById("distanceValue").textContent = value;
+              }
+            </script>
+          </div>
+        </div>
+        <div class="graph-container">
+          <div>
+            <h2>Gráfica Distancias Vs. Tiempo</h2>
+            <canvas id="graphCanvas" width="400" height="300"></canvas>
+          </div>
+          <div>
+            <h2>Gráfica Velocidad Vs. Tiempo</h2>
+            <canvas id="velocityGraphCanvas" width="400" height="300"></canvas>
+          </div>
+        </div>
       </div>
-      <canvas id="graphCanvas" width="400" height="300"></canvas>
     </div>
 
     <script src="js/graph.js"></script>
