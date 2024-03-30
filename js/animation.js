@@ -31,14 +31,52 @@ let motoHeight = 40;
 let motoWidth = 40;
 let graph;
 let velocityGraph;
+let shouldStartSimulation = true;
 const initialMotoPositionX = 50;
 const initialMotoPositionY = 200;
 const fixedDeltaTime = 1 / 60; // Tiempo fijo entre cada actualización de estado en segundos
 
 background = new Background("img/background.jpg", canvas, context);
 
-// Asignación de eventos
-startButton.addEventListener("click", init);
+function showModal(message) {
+  const modal = document.getElementById("alertModal");
+  const modalText = document.getElementById("alertModalText");
+  modalText.textContent = message;
+  modal.style.display = "flex"; // Cambia 'visibility' a 'display'
+}
+
+document.getElementById("confirmButton").onclick = function () {
+  document.getElementById("alertModal").style.display = "none"; // Cambia 'visibility' a 'display'
+  shouldStartSimulation = true;
+  if (shouldStartSimulation) {
+    init();
+  }
+};
+
+document.getElementById("cancelButton").onclick = function () {
+  document.getElementById("alertModal").style.display = "none"; // Cierra el mensaje
+  shouldStartSimulation = false; // Evita que la simulación se inicie
+};
+
+startButton.addEventListener("click", function () {
+  const speed = Number(speedInput.value);
+  const simulationTime = Number(simulationTimeInput.value);
+  const simulationDistance = Number(simulationDistanceInput.value);
+
+  if (speed * simulationTime > simulationDistance) {
+    showModal(
+      "La Distancia de Simulación es muy pequeña!!. " +
+        "Esto puede resultar en que no se vea toda la simulación. " +
+        "¿Deseas continuar de todos modos?"
+    );
+  } else {
+    shouldStartSimulation = true;
+    if (shouldStartSimulation) {
+      init();
+    }
+  }
+});
+
 endButton.addEventListener("click", endSimulation);
 simulationDistanceInput.addEventListener("input", loadAndDrawImage);
 
@@ -67,13 +105,20 @@ function loadAndDrawImage() {
     const maxTime = Number(simulationTimeInput.value);
     const maxDistance = Number(simulationDistanceInput.value);
     const maxSpeed = Number(speedInput.value) * 2;
-    graph = new Graph(graphCanvas, graphContext, maxTime, maxDistance);
+    graph = new Graph(
+      graphCanvas,
+      graphContext,
+      maxTime,
+      maxDistance,
+      "Distancia (m)"
+    );
     graph.draw();
     velocityGraph = new Graph(
       velocityGraphCanvas,
       velocityGraphContext,
       maxTime,
-      maxSpeed
+      maxSpeed,
+      "Velocidad (m/s)"
     );
     velocityGraph.draw();
   };
@@ -104,7 +149,23 @@ function init() {
 
   const maxTime = Number(simulationTimeInput.value);
   const maxDistance = Number(simulationDistanceInput.value);
-  graph = new Graph(graphCanvas, graphContext, maxTime, maxDistance);
+  graph = new Graph(
+    graphCanvas,
+    graphContext,
+    maxTime,
+    maxDistance,
+    "Distancia (m)"
+  );
+
+  const maxSpeed = Number(speedInput.value) * 2;
+
+  velocityGraph = new Graph(
+    velocityGraphCanvas,
+    velocityGraphContext,
+    maxTime,
+    maxSpeed,
+    "Velocidad (m/s)"
+  );
 
   // Calcula pixelsPerMeter en función de la distancia de simulación
   const simulationDistance = Number(simulationDistanceInput.value);
@@ -143,7 +204,8 @@ function init() {
   speedInput.disabled = true;
   simulationTimeInput.disabled = true;
 }
-startButton.addEventListener("click", init);
+
+// startButton.addEventListener("click", init);
 
 // Función para terminar la simulación
 function endSimulation() {

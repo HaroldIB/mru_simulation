@@ -1,10 +1,11 @@
 class Graph {
-  constructor(canvas, context, maxTime, maxDistance) {
+  constructor(canvas, context, maxTime, maxDistance, titleY) {
     this.canvas = canvas;
     this.context = context;
     this.maxTime = maxTime;
     this.maxDistance = maxDistance;
     this.points = [];
+    this.titleY = titleY;
   }
 
   addPoint(time, distance) {
@@ -64,7 +65,7 @@ class Graph {
     );
     this.context.save();
     this.context.rotate(-Math.PI / 2);
-    this.context.fillText("Distancia (m)", -this.canvas.height / 2, 20);
+    this.context.fillText(this.titleY, -this.canvas.height / 2, 20);
     this.context.restore();
     // Dibuja las flechas en los ejes
     this.context.strokeStyle = "black";
