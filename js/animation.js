@@ -38,11 +38,14 @@ const fixedDeltaTime = 1 / 60; // Tiempo fijo entre cada actualización de estad
 
 background = new Background("img/background.jpg", canvas, context);
 
-function showModal(message) {
+function showModal(message, disableConfirmButton) {
   const modal = document.getElementById("alertModal");
   const modalText = document.getElementById("alertModalText");
+  const confirmButton = document.getElementById("confirmButton");
+
   modalText.textContent = message;
-  modal.style.display = "flex"; // Cambia 'visibility' a 'display'
+  modal.style.display = "flex";
+  confirmButton.disabled = disableConfirmButton;
 }
 
 document.getElementById("confirmButton").onclick = function () {
@@ -57,23 +60,47 @@ document.getElementById("cancelButton").onclick = function () {
   document.getElementById("alertModal").style.display = "none"; // Cierra el mensaje
   shouldStartSimulation = false; // Evita que la simulación se inicie
 };
-
 startButton.addEventListener("click", function () {
   const speed = Number(speedInput.value);
   const simulationTime = Number(simulationTimeInput.value);
   const simulationDistance = Number(simulationDistanceInput.value);
 
+  if (
+    speed < 0 ||
+    simulationTime < 0 ||
+    simulationDistance < 0 ||
+    isNaN(speed) ||
+    isNaN(simulationTime) ||
+    isNaN(simulationDistance) ||
+    speedInput.value.includes("e") ||
+    simulationTimeInput.value.includes("e") ||
+    simulationDistanceInput.value.includes("e") ||
+    speedInput.value === "" ||
+    simulationTimeInput.value === "" ||
+    simulationDistanceInput.value === "" ||
+    speedInput.value.includes("+") ||
+    simulationTimeInput.value.includes("+") ||
+    simulationDistanceInput.value.includes("+") ||
+    speedInput.value.includes(",") ||
+    simulationTimeInput.value.includes(",") ||
+    simulationDistanceInput.value.includes(",")
+  ) {
+    showModal(
+      "Valor incorrecto. Por favor, ingresa un número no negativo.",
+      true
+    );
+    return;
+  }
+
   if (speed * simulationTime > simulationDistance) {
     showModal(
       "La Distancia de Simulación es muy pequeña!!. " +
         "Esto puede resultar en que no se vea toda la simulación. " +
-        "¿Deseas continuar de todos modos?"
+        "¿Deseas continuar de todos modos?",
+      false
     );
   } else {
-    shouldStartSimulation = true;
-    if (shouldStartSimulation) {
-      init();
-    }
+    init();
   }
 });
 
@@ -262,10 +289,12 @@ function animFrame() {
   frameCount++; // Incrementa el contador de cuadros
 
   // Solicita el siguiente cuadro de animación solo si no se han mostrado 180 cuadros
+
   if (frameCount < totalFrames) {
     animationId = requestAnimationFrame(animFrame, canvas);
   } else {
     // Muestra un mensaje emergente con la distancia alcanzada por el motociclista
+    console.log("desde aniframe");
     const modal = document.getElementById("modal");
     const modalText = document.getElementById("modalText");
     const distanceInMeters = distanceDisplay.distance / pixelsPerMeter;
